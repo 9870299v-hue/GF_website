@@ -39,20 +39,11 @@
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Assigning different speeds/delays to hearts */
         .h1 { left: 10%; animation-duration: 7s; animation-delay: 0s; }
         .h2 { left: 25%; animation-duration: 5s; animation-delay: 1.5s; font-size: 26px; }
         .h3 { left: 45%; animation-duration: 8s; animation-delay: 0.5s; }
@@ -115,30 +106,61 @@
             line-height: 1.6;
         }
 
-        /* Polaroids */
+        /* Polaroids Desktop */
         .polaroid {
             position: absolute;
             background: white;
-            padding: 10px 10px 25px 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            border-radius: 4px;
+            padding: 12px 12px 30px 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+            border-radius: 6px;
             z-index: 5;
         }
 
         .polaroid img {
-            width: 160px;
-            height: 160px;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .p1 { top: 5%; left: 3%; transform: rotate(-8deg); }
+        .p2 { top: 12%; right: 3%; transform: rotate(6deg); }
+        .p3 { bottom: 5%; left: 4%; transform: rotate(5deg); }
+
+        /* Gallery for Mobile */
+        .mobile-gallery {
+            display: none;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .mobile-polaroid {
+            background: white;
+            padding: 8px 8px 22px 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .mobile-polaroid img {
+            width: 130px;
+            height: 130px;
             object-fit: cover;
             border-radius: 2px;
         }
 
-        .p1 { top: 5%; left: 4%; transform: rotate(-8deg); }
-        .p2 { top: 12%; right: 4%; transform: rotate(6deg); }
-        .p3 { bottom: 5%; left: 5%; transform: rotate(5deg); }
+        .mp1 { transform: rotate(-3deg); }
+        .mp2 { transform: rotate(3deg); }
+        .mp3 { transform: rotate(-2deg); }
 
-        @media (max-width: 900px) {
-            .polaroid { display: none; }
+        /* Mobile Adjustments */
+        @media (max-width: 1024px) {
+            .polaroid { display: none; } /* Hide floating side images on small screens */
+            .mobile-gallery { display: flex; } /* Show stacked gallery inside card on mobile */
             body { padding: 20px 10px; }
+            .main-card { padding: 20px 15px; }
         }
     </style>
 </head>
@@ -154,7 +176,7 @@
         <div class="heart h6">💗</div>
     </div>
 
-    <!-- Polaroid Photos -->
+    <!-- Polaroid Photos (Desktop Side View) -->
     <div class="polaroid p1">
         <img src="{{ url_for('static', filename='photo1.jpg') }}" alt="Photo 1">
     </div>
@@ -170,6 +192,19 @@
         <h1>{{ data.title }}</h1>
         <div class="subtitle">{{ data.subtitle }}</div>
         <p class="intro-text">{{ data.intro }}</p>
+
+        <!-- Polaroid Photos (Mobile Inline View) -->
+        <div class="mobile-gallery">
+            <div class="mobile-polaroid mp1">
+                <img src="{{ url_for('static', filename='photo1.jpg') }}" alt="Photo 1">
+            </div>
+            <div class="mobile-polaroid mp2">
+                <img src="{{ url_for('static', filename='photo2.jpg') }}" alt="Photo 2">
+            </div>
+            <div class="mobile-polaroid mp3">
+                <img src="{{ url_for('static', filename='photo3.jpg') }}" alt="Photo 3">
+            </div>
+        </div>
 
         {% for card in data.cards %}
         <div class="card-section">
