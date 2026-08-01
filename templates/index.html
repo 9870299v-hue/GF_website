@@ -27,29 +27,41 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
+            z-index: 15; /* Elevated above background elements */
         }
 
         .heart {
             position: absolute;
-            color: rgba(225, 29, 72, 0.4);
-            font-size: 20px;
+            font-size: 28px; /* Increased base size */
             animation: float 6s ease-in-out infinite;
-            bottom: -30px;
+            bottom: -40px;
+            filter: drop-shadow(0 2px 4px rgba(225, 29, 72, 0.3)); /* Added glow effect */
         }
 
         @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.8; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+            0% { 
+                transform: translateY(0) rotate(0deg) scale(0.8); 
+                opacity: 0; 
+            }
+            20% { 
+                opacity: 1; /* Made fully opaque so it's super visible */
+            }
+            80% {
+                opacity: 0.9;
+            }
+            100% { 
+                transform: translateY(-105vh) rotate(360deg) scale(1.2); 
+                opacity: 0; 
+            }
         }
 
-        .h1 { left: 10%; animation-duration: 7s; animation-delay: 0s; }
-        .h2 { left: 25%; animation-duration: 5s; animation-delay: 1.5s; font-size: 26px; }
-        .h3 { left: 45%; animation-duration: 8s; animation-delay: 0.5s; }
-        .h4 { left: 65%; animation-duration: 6s; animation-delay: 2s; font-size: 24px; }
-        .h5 { left: 80%; animation-duration: 7.5s; animation-delay: 1s; }
-        .h6 { left: 92%; animation-duration: 5.5s; animation-delay: 2.5s; }
+        /* Adjusted positions and sizes for high visibility */
+        .h1 { left: 5%; animation-duration: 6s; animation-delay: 0s; font-size: 30px; }
+        .h2 { left: 20%; animation-duration: 4.5s; animation-delay: 1.2s; font-size: 34px; }
+        .h3 { left: 38%; animation-duration: 7s; animation-delay: 0.3s; font-size: 26px; }
+        .h4 { left: 55%; animation-duration: 5s; animation-delay: 1.8s; font-size: 32px; }
+        .h5 { left: 72%; animation-duration: 6.5s; animation-delay: 0.8s; font-size: 28px; }
+        .h6 { left: 88%; animation-duration: 4.8s; animation-delay: 2.2s; font-size: 34px; }
 
         /* Main Letter Card */
         .main-card {
@@ -157,8 +169,8 @@
 
         /* Mobile Adjustments */
         @media (max-width: 1024px) {
-            .polaroid { display: none; } /* Hide floating side images on small screens */
-            .mobile-gallery { display: flex; } /* Show stacked gallery inside card on mobile */
+            .polaroid { display: none; }
+            .mobile-gallery { display: flex; }
             body { padding: 20px 10px; }
             .main-card { padding: 20px 15px; }
         }
@@ -168,12 +180,12 @@
 
     <!-- Floating Hearts -->
     <div class="hearts-layer">
-        <div class="heart h1">♥</div>
+        <div class="heart h1">❤️</div>
         <div class="heart h2">💖</div>
-        <div class="heart h3">♥</div>
-        <div class="heart h4">💕</div>
-        <div class="heart h5">♥</div>
-        <div class="heart h6">💗</div>
+        <div class="heart h3">💕</div>
+        <div class="heart h4">💗</div>
+        <div class="heart h5">❤️</div>
+        <div class="heart h6">💖</div>
     </div>
 
     <!-- Polaroid Photos (Desktop Side View) -->
