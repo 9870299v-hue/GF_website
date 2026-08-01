@@ -1,6 +1,4 @@
-
-       
-     <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,6 +19,48 @@
             overflow-x: hidden;
         }
 
+        /* Floating Hearts Layer */
+        .hearts-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(225, 29, 72, 0.4);
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+            bottom: -30px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Assigning different speeds/delays to hearts */
+        .h1 { left: 10%; animation-duration: 7s; animation-delay: 0s; }
+        .h2 { left: 25%; animation-duration: 5s; animation-delay: 1.5s; font-size: 26px; }
+        .h3 { left: 45%; animation-duration: 8s; animation-delay: 0.5s; }
+        .h4 { left: 65%; animation-duration: 6s; animation-delay: 2s; font-size: 24px; }
+        .h5 { left: 80%; animation-duration: 7.5s; animation-delay: 1s; }
+        .h6 { left: 92%; animation-duration: 5.5s; animation-delay: 2.5s; }
+
+        /* Main Letter Card */
         .main-card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
@@ -30,6 +70,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             text-align: center;
             z-index: 10;
+            backdrop-filter: blur(5px);
         }
 
         h1 {
@@ -85,17 +126,17 @@
         }
 
         .polaroid img {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             object-fit: cover;
             border-radius: 2px;
         }
 
-        .p1 { top: 5%; left: 5%; transform: rotate(-8deg); }
-        .p2 { top: 10%; right: 5%; transform: rotate(6deg); }
-        .p3 { bottom: 5%; left: 8%; transform: rotate(5deg); }
+        .p1 { top: 5%; left: 4%; transform: rotate(-8deg); }
+        .p2 { top: 12%; right: 4%; transform: rotate(6deg); }
+        .p3 { bottom: 5%; left: 5%; transform: rotate(5deg); }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .polaroid { display: none; }
             body { padding: 20px 10px; }
         }
@@ -103,6 +144,28 @@
 </head>
 <body>
 
+    <!-- Floating Hearts -->
+    <div class="hearts-layer">
+        <div class="heart h1">♥</div>
+        <div class="heart h2">💖</div>
+        <div class="heart h3">♥</div>
+        <div class="heart h4">💕</div>
+        <div class="heart h5">♥</div>
+        <div class="heart h6">💗</div>
+    </div>
+
+    <!-- Polaroid Photos -->
+    <div class="polaroid p1">
+        <img src="{{ url_for('static', filename='photo1.jpg') }}" alt="Photo 1">
+    </div>
+    <div class="polaroid p2">
+        <img src="{{ url_for('static', filename='photo2.jpg') }}" alt="Photo 2">
+    </div>
+    <div class="polaroid p3">
+        <img src="{{ url_for('static', filename='photo3.jpg') }}" alt="Photo 3">
+    </div>
+
+    <!-- Main Letter Card -->
     <div class="main-card">
         <h1>{{ data.title }}</h1>
         <div class="subtitle">{{ data.subtitle }}</div>
