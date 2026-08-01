@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.title }}</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #FFE4E6 0%, #FECDD3 100%);
+            color: #4C0519;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Floating Hearts */
+        .hearts-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(244, 114, 182, 0.4);
+            font-size: 24px;
+            animation: float-heart linear infinite;
+        }
+
+        @keyframes float-heart {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+        }
+
+        .heart:nth-child(1)  { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+        .heart:nth-child(2)  { left: 20%; animation-duration: 12s; animation-delay: 1s; }
+        .heart:nth-child(3)  { left: 30%; animation-duration: 9s; animation-delay: 0.5s; }
+        .heart:nth-child(4)  { left: 40%; animation-duration: 15s; animation-delay: 2s; }
+        .heart:nth-child(5)  { left: 50%; animation-duration: 11s; animation-delay: 1s; }
+        .heart:nth-child(6)  { left: 60%; animation-duration: 14s; animation-delay: 3s; }
+        .heart:nth-child(7)  { left: 70%; animation-duration: 8s; animation-delay: 0.2s; }
+        .heart:nth-child(8)  { left: 80%; animation-duration: 13s; animation-delay: 1.5s; }
+        .heart:nth-child(9)  { left: 90%; animation-duration: 10s; animation-delay: 0.8s; }
+        .heart:nth-child(10) { left: 95%; animation-duration: 16s; animation-delay: 4s; }
+
+        /* Polaroid Photos */
+        .bg-photo {
+            position: absolute;
+            width: 180px;
+            padding: 10px 10px 25px 10px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .bg-photo img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .bg-photo:hover {
+            transform: scale(1.08) rotate(0deg) !important;
+            z-index: 10;
+        }
+
+        .photo-left { top: 12%; left: 8%; transform: rotate(-10deg); }
+        .photo-right { top: 18%; right: 8%; transform: rotate(8deg); }
+        .photo-bottom { bottom: 10%; left: 15%; transform: rotate(-5deg); }
+
+        /* Main Card */
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            max-width: 500px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        h1 { color: #E11D48; margin-bottom: 5px; }
+        .date { font-size: 0.95em; color: #881337; margin-bottom: 25px; }
+        p { line-height: 1.7; color: #701A75; font-size: 1.1em; }
+        .timeline { margin-top: 30px; text-align: left; }
+        
+        .memory-box {
+            background: #FFF1F2;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border-left: 4px solid #F472B6;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        
+        .memory-title { font-weight: bold; color: #BE123C; }
+        .memory-desc { font-size: 0.9em; color: #9D174D; margin-top: 5px; }
+
+        @media (max-width: 768px) {
+            .bg-photo { width: 130px; padding: 8px 8px 18px 8px; }
+            .bg-photo img { height: 110px; }
+            .card { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hearts-layer">
+        <div class="heart">♥</div>
+        <div class="heart">♥️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">🩷</div>
+        <div class="heart">💖</div>
+        <div class="heart">💗</div>
+        <div class="heart">💕</div>
+        <div class="heart">💓</div>
+        <div class="heart">💞</div>
+        <div class="heart">❤️</div>
+    </div>
+
+    <div class="bg-photo photo-left">
+        <img src="{{ url_for('static', filename='photo1.jpg') }}" alt="Us 1">
+    </div>
+
+    <div class="bg-photo photo-right">
+        <img src="{{ url_for('static', filename='photo2.jpg') }}" alt="Us 2">
+    </div>
+
+    <div class="bg-photo photo-bottom">
+        <img src="{{ url_for('static', filename='photo3.jpg') }}" alt="Us 3">
+    </div>
+
+    <div class="card">
+        <h1>{{ data.title }}</h1>
+        <div class="date">Since {{ data.date_met }}</div>
+        <p>{{ data.message }}</p>
+
+        <div class="timeline">
+            <h3>Our Journey</h3>
+            {% for memory in data.memories %}
+                <div class="memory-box">
+                    <div class="memory-title">{{ memory.title }}</div>
+                    <div class="memory-desc">{{ memory.desc }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
